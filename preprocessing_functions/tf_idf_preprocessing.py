@@ -29,7 +29,8 @@ def tf_idf(
     oot_tf_idf_vector = tf_idf_vectorizer.transform(oot[text_field].values.astype('str'))
 
     # преобразуем feature name в цифры для обучения, так как русские символы не воспринимаются
-    number_feature_list = [i for i in range(len(tf_idf_vectorizer.get_feature_names()))]
+    feature_names = tf_idf_vectorizer.get_feature_names()
+    number_feature_list = [i for i in range(len(feature_names))]
 
     train_tf_idf = pd.DataFrame(data=train_tf_idf_vector.toarray(), columns=number_feature_list, index=train.index)
     oos_tf_idf = pd.DataFrame(data=oos_tf_idf_vector.toarray(), columns=number_feature_list, index=oos.index)
@@ -44,4 +45,4 @@ def tf_idf(
         oos_tf_idf = pd.concat([oos_tf_idf, y_oos])
         oot_tf_idf = pd.concat([oot_tf_idf, y_oot])
 
-    return train_tf_idf, oos_tf_idf, oot_tf_idf
+    return train_tf_idf, oos_tf_idf, oot_tf_idf, feature_names
