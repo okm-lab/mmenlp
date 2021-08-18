@@ -1,4 +1,3 @@
-Minimal = fact('Minimal', [])
 Childrens = fact('Childrens', [])
 Club = fact('Club', [])
 Bed = fact('Bed', [])
@@ -54,4 +53,22 @@ CHILDREN_NECES_2 = rule(
 CHILDREN_NECES = or_(
     CHILDREN_NECES_1,
     CHILDREN_NECES_2
+)
+
+# # # #
+
+WITHOUT = morph_pipeline(
+    'без',
+    'нет'
+)
+
+WO_CHILDREN = or_(
+    rule(
+        WITHOUT,
+        CHILDRENS
+    ),
+    rule(
+        CHILDRENS,
+        WITHOUT
+    )
 )
