@@ -113,22 +113,22 @@ NAME = morph_pipeline([
     'стоимость',
     'тысяч рублей',
     'рублей',
-    'потратить'
-])
+    'потратить',
+    'около',
+    'в пределах'
+]).interpretation(
+        Budget.budget_word
+    )
 
 B1 = rule(
     AMOUNT.interpretation(
         Budget.amount
     ),
-    NAME.interpretation(
-        Budget.budget_word
-    )
+    NAME
 )
 
 B2 = rule(
-	NAME.interpretation(
-        	Budget.budget_word
-	),
+	NAME,
 	AMOUNT.interpretation(
 		Budget.amount
 	)
